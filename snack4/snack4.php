@@ -279,6 +279,22 @@ studenti, o magari sul nome della nostra classe. -->
 // massimo, e filtriamo in base ad esso solo gli studenti che abbiano una media esclusivamente inferiore al voto 
 // inserito.
 
+    $filteredClassi;
+    $userVote = floatval($_GET["voto"]);
+
+    if(isset($_GET["voto"]) && $userVote){
+        $filteredClassi = [];
+        foreach($classi as $classiList => $singleClass){
+            foreach($singleClass as $singleElement ){
+                if($singleElement["voto_medio"] <= $userVote){
+                    $filteredClassi[$classiList][] = $singleElement;
+                }
+            }
+        }
+    } else {
+        $filteredClassi = $classi;
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -295,10 +311,10 @@ studenti, o magari sul nome della nostra classe. -->
     <main class="container">
         <div class="row">
             <div class="col-12">
-                <form action="snack4.php">
-                    <div class="mb-3 mt-4">
+                <form action="snack4.php" method="GET">
+                    <div class="mb-3 mt-3">
                         <label for="voto" class="form-label">Inserire un voto per filtrare gli studenti</label>
-                        <input class="form-control" type="text" id="vote" name="vote" placeholder="voto">
+                        <input class="form-control" type="text" id="voto" name="voto" placeholder="voto">
                     </div>
                     <button type="submit" class="btn btn-primary">Invia</button>
                     <button class="btn btn-warning">Reset</button>
