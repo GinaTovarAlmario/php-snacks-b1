@@ -295,6 +295,25 @@ studenti, o magari sul nome della nostra classe. -->
         $filteredClassi = $classi;
     }
 
+// Aggiungiamo un input che consenta l'inserimento del linguaggio di programmazione preferito, e filtriamo in base
+// Snack 4D:
+// ad esso solo gli studenti che abbiano quel linguaggio come preferito.
+
+    $extraFilteredClassi;
+    $userChoiceLanguage = strtoupper( $_GET["favorite_lang"]);
+
+    if(isset($_GET["favorite_lang"]) && $userChoiceLanguage){
+        $extraFilteredClassi = [];
+        foreach($filteredClassi as $classiList => $singleClass){
+            foreach($singleClass as $singleElement ){
+                if($singleElement["linguaggio_preferito"] === $userChoiceLanguage){
+                    $extraFilteredClassi[$classiList][] = $singleElement;
+                }
+            }
+        }
+    } else {
+        $extraFilteredClassi = $filteredClassi;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -312,14 +331,22 @@ studenti, o magari sul nome della nostra classe. -->
         <div class="row">
             <div class="col-12">
                 <form action="snack4.php" method="GET">
-                    <div class="mb-3 mt-3">
+
+                    <div class="mb-4 mt-4">
                         <label for="voto" class="form-label">Inserire un voto per filtrare gli studenti</label>
                         <input class="form-control" type="text" id="voto" name="voto" placeholder="voto">
                     </div>
-                    <button type="submit" class="btn btn-primary">Invia</button>
-                    <button class="btn btn-warning">Reset</button>
+
+                    <div class="mb-4 mt-4">
+                        <label for="favorite_lang" class="form-label">Inserire il Linguaggio di programmazione da filtrare</label>
+                        <input class="form-control" type="text" id="favorite_lang" name="favorite_lang">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mb-4">Invia</button>
+                    <button class="btn btn-warning mb-4">Reset</button>
+
                 </form>
-                <?php foreach( $filteredClassi as $classiList => $singleClass){ ?>
+                <?php foreach( $extraFilteredClassi as $classiList => $singleClass){ ?>
                     <section>
                         <h2><?= $classiList?> </h2>
                         <ul>
