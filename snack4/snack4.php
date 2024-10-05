@@ -8,7 +8,9 @@ Filtrare il nostro array e mostrare, sempre suddivisi per classe, esclusivamente
 con voto medio sufficiente.
 Snack 4C:
 Commentiamo il filtro del punto 4B (lasciatelo nel codice, in modo che possiamo comunque vederlo) e aggiungiamo
-un minimo di stile a piacere. Inseriamo quindi un form in cui l'utente possa inserire un input con il voto medio massimo, e filtriamo in base ad esso solo gli studenti che abbiano una media esclusivamente inferiore al voto inserito.
+un minimo di stile a piacere. Inseriamo quindi un form in cui l'utente possa inserire un input con il voto medio
+massimo, e filtriamo in base ad esso solo gli studenti che abbiano una media esclusivamente inferiore al voto 
+inserito.
 Snack 4D:
 Aggiungiamo un input che consenta l'inserimento del linguaggio di programmazione preferito, e filtriamo in base
 ad esso solo gli studenti che abbiano quel linguaggio come preferito.
@@ -258,16 +260,25 @@ studenti, o magari sul nome della nostra classe. -->
 // Snack 4B:
 // Filtrare il nostro array e mostrare, sempre suddivisi per classe, esclusivamente gli studenti e le studentesse
 // con voto medio sufficiente.
-    $filteredClassi=[];
-    // vado a filtrare in base al voto sufficiente
-    foreach($classi as $classiList => $singleClass){
-        foreach($singleClass as $singleElement ){
-            if( floatval($singleElement["voto_medio"]) >= 6){
-                // devo comporre la matrioska
-                $filteredClassi[$classiList][] = $singleElement;
-            }
-        }
-    }
+
+    // $filteredClassi=[];
+    // // vado a filtrare in base al voto sufficiente
+
+    // foreach($classi as $classiList => $singleClass){
+    //     foreach($singleClass as $singleElement ){
+    //         if( floatval($singleElement["voto_medio"]) >= 6){
+    //             // devo comporre la matrioska
+    //             $filteredClassi[$classiList][] = $singleElement;
+    //         }
+    //     }
+    // }
+
+ // Snack 4C:
+ // Commentiamo il filtro del punto 4B (lasciatelo nel codice, in modo che possiamo comunque vederlo) eaggiungiamo
+// un minimo di stile a piacere. Inseriamo quindi un form in cui l'utente possa inserire un input con il voto medio
+// massimo, e filtriamo in base ad esso solo gli studenti che abbiano una media esclusivamente inferiore al voto 
+// inserito.
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -284,6 +295,14 @@ studenti, o magari sul nome della nostra classe. -->
     <main class="container">
         <div class="row">
             <div class="col-12">
+                <form action="snack4.php">
+                    <div class="mb-3 mt-4">
+                        <label for="voto" class="form-label">Inserire un voto per filtrare gli studenti</label>
+                        <input class="form-control" type="text" id="vote" name="vote" placeholder="voto">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Invia</button>
+                    <button class="btn btn-warning">Reset</button>
+                </form>
                 <?php foreach( $filteredClassi as $classiList => $singleClass){ ?>
                     <section>
                         <h2><?= $classiList?> </h2>
