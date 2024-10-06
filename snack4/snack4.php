@@ -3,17 +3,6 @@ https://pastebin.com/HksnN0aS
 Snack 4A:
 Stampare in pagina, senza particolare stilizzazione il nome di ogni classe e sotto ognuna, i dati di ogni
 studente/studentessa presente nella relativa classe.
-Snack 4B:
-Filtrare il nostro array e mostrare, sempre suddivisi per classe, esclusivamente gli studenti e le studentesse
-con voto medio sufficiente.
-Snack 4C:
-Commentiamo il filtro del punto 4B (lasciatelo nel codice, in modo che possiamo comunque vederlo) e aggiungiamo
-un minimo di stile a piacere. Inseriamo quindi un form in cui l'utente possa inserire un input con il voto medio
-massimo, e filtriamo in base ad esso solo gli studenti che abbiano una media esclusivamente inferiore al voto 
-inserito.
-Snack 4D:
-Aggiungiamo un input che consenta l'inserimento del linguaggio di programmazione preferito, e filtriamo in base
-ad esso solo gli studenti che abbiano quel linguaggio come preferito.
 Bonus:
 Implementare funzionalita' di filtraggio aggiuntive basate, ad esempio, su nome, cognome o anni dei relativi
 studenti, o magari sul nome della nostra classe. -->
@@ -280,9 +269,9 @@ studenti, o magari sul nome della nostra classe. -->
 // inserito.
 
     $filteredClassi;
-    $userVote = floatval($_GET["voto"]);
 
-    if(isset($_GET["voto"]) && $userVote){
+    if(isset($_GET["voto"]) && is_numeric($_GET["voto"])){
+        $userVote = floatval($_GET["voto"]);
         $filteredClassi = [];
         foreach($classi as $classiList => $singleClass){
             foreach($singleClass as $singleElement ){
@@ -300,9 +289,9 @@ studenti, o magari sul nome della nostra classe. -->
 // ad esso solo gli studenti che abbiano quel linguaggio come preferito.
 
     $extraFilteredClassi;
-    $userChoiceLanguage = strtoupper( $_GET["favorite_lang"]);
 
-    if(isset($_GET["favorite_lang"]) && $userChoiceLanguage){
+    if(isset($_GET["favorite_lang"]) && empty(strtoupper(trim( $_GET["favorite_lang"])))){
+        $userChoiceLanguage =  strtoupper(trim( $_GET["favorite_lang"]));
         $extraFilteredClassi = [];
         foreach($filteredClassi as $classiList => $singleClass){
             foreach($singleClass as $singleElement ){
@@ -358,6 +347,7 @@ studenti, o magari sul nome della nostra classe. -->
                                     <p><?="Età: " . $singleElement["anni"] ?></p>
                                     <p><?="Voto Medio: " . $singleElement["voto_medio"] ?></p>
                                     <p><?="Linguaggio Preferito: " . $singleElement["linguaggio_preferito"] ?></p>
+                                    <img class="img-fluid" src="<?= $singleElement["immagine"] ?>" alt="<?= $singleElement["nome"] ?>">
                                 </li>
                             <?php }?>
                         </ul>
