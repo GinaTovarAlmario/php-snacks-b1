@@ -337,17 +337,17 @@ studenti, o magari sul nome della nostra classe. -->
                 </form>
                 <?php foreach( $extraFilteredClassi as $classiList => $singleClass){ ?>
                     <section>
-                        <h2><?= $classiList?> </h2>
+                        <h2><?= $classiList; ?> </h2>
                         <ul>
                             <?php foreach( $singleClass as $singleElement) {?>
                                 <li>
-                                    <p><?="Id: " . $singleElement["id"] ?></p>
-                                    <p><?="Nome: " . $singleElement["nome"] ?></p>
-                                    <p><?="Cognome: " . $singleElement["cognome"] ?></p>
-                                    <p><?="Età: " . $singleElement["anni"] ?></p>
-                                    <p><?="Voto Medio: " . $singleElement["voto_medio"] ?></p>
-                                    <p><?="Linguaggio Preferito: " . $singleElement["linguaggio_preferito"] ?></p>
-                                    <img class="img-fluid" src="<?= $singleElement["immagine"] ?>" alt="<?= $singleElement["nome"] ?>">
+                                    <p><?="Id: " . $singleElement["id"]; ?></p>
+                                    <p><?="Nome: " . $singleElement["nome"]; ?></p>
+                                    <p><?="Cognome: " . $singleElement["cognome"]; ?></p>
+                                    <p><?="Età: " . $singleElement["anni"]; ?></p>
+                                    <p><?="Voto Medio: " . $singleElement["voto_medio"]; ?></p>
+                                    <p><?="Linguaggio Preferito: " . $singleElement["linguaggio_preferito"]; ?></p>
+                                    <img class="img-fluid" src="<?= $singleElement["immagine"]; ?>" alt="<?= $singleElement["nome"] ?>">
                                 </li>
                             <?php }?>
                         </ul>
